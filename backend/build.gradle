@@ -1,0 +1,60 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'eclipse'
+	id "org.jetbrains.kotlin.jvm" version "1.3.72"
+}
+
+group = 'com.github.swapnil'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compile 'com.github.marlonlom:timeago'
+	compile group: 'com.github.marlonlom', name: 'timeago', version: '4.0.0'
+	compileOnly 'org.projectlombok:lombok'
+	compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf'
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+	runtimeOnly 'mysql:mysql-connector-java'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	compile group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+	compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: '1.3.72'
+	testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: '1.3.72'
+	annotationProcessor 'org.projectlombok:lombok'
+	compileOnly("org.mapstruct:mapstruct-jdk8:1.2.0.Final")
+   	annotationProcessor "org.mapstruct:mapstruct-processor:1.2.0.Final"
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+compileJava {
+    options.annotationProcessorPath = configurations.annotationProcessor
+
+    // if you need to configure mapstruct component model
+    options.compilerArgs << "-Amapstruct.defaultComponentModel=spring" 
+    options.setAnnotationProcessorGeneratedSourcesDirectory( file("$projectDir/src/main/java"))
+}
