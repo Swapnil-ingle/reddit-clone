@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		httpSecurity.csrf().disable()
 			.authorizeRequests()
 			.antMatchers("/api/auth/**").permitAll()
+			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/api/subreddit").permitAll()
 			.antMatchers("/v2/api-docs", 
 					"/configuration/ui", 
@@ -45,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 					"/webjars/**").permitAll()
 			.anyRequest().authenticated();
 
+		httpSecurity.cors();
 		httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 
