@@ -29,6 +29,6 @@ The goal of the project is not JUST to finish the project following the tutorial
 * Implemented the sign-up, sign-in functionality.
 
 
-### Latest Changes:
+#### Latest Changes:
 * Added: The homepage of the reddit screen with different compenent such as subreddit side-bar, vote-section, etc.
 * Fixed: Added proper padding between title bar and post section.
