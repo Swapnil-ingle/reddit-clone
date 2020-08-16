@@ -32,3 +32,4 @@ The goal of the project is not JUST to finish the project following the tutorial
 #### Latest Changes:
 * Added: The homepage of the reddit screen with different compenent such as subreddit side-bar, vote-section, etc.
 * Fixed: Added proper padding between title bar and post section.
+* Added: Create-Subreddit page, create-post page, list-posts page.
