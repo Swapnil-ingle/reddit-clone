@@ -4,6 +4,7 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -113,11 +114,14 @@ public class AuthService {
 		refreshTokenSvc.validateRefreshToken(refreshTokenRequest.getRefreshToken());
 		String token = jwtProvider.generateTokenWithUserName(refreshTokenRequest.getUsername());
 
-		return AuthenticationResponse.builder()
-				.authenticationToken(token)
+		return AuthenticationResponse.builder().authenticationToken(token)
 				.refreshToken(refreshTokenRequest.getRefreshToken())
 				.expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
-				.username(refreshTokenRequest.getUsername())
-				.build();
+				.username(refreshTokenRequest.getUsername()).build();
+	}
+
+	public boolean isLoggedIn() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return !(auth instanceof AnonymousAuthenticationToken) && auth.isAuthenticated();
 	}
 }

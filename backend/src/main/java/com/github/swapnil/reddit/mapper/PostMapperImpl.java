@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-06-28T01:04:38+0530",
+    date = "2020-08-16T15:30:01+0530",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_73 (Oracle Corporation)"
 )
 @Component
@@ -63,7 +63,9 @@ public class PostMapperImpl extends PostMapper {
         postResponse.setVoteCount( post.getVoteCount() );
 
         postResponse.setDuration( getDuration(post) );
+        postResponse.setDownVote( isPostDownVoted(post) );
         postResponse.setCommentCount( commentCount(post) );
+        postResponse.setUpVote( isPostUpVoted(post) );
 
         return postResponse;
     }
