@@ -25,4 +25,8 @@ export class PostService {
   createPost(postPayload: CreatePostPayload): Observable<any> {
     return this.httpClient.post('http://localhost:8080/api/posts/', postPayload);
   }
+
+  getPostsBySubreddit(id: number) : Observable<Array<PostModel>> {
+    return this.httpClient.get<Array<PostModel>>('http://localhost:8080/api/posts/by-subreddit/' + id);
+  }
 }
