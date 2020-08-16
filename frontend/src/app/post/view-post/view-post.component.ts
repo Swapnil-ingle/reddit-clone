@@ -3,6 +3,9 @@ import { PostService } from 'src/app/shared/post.service';
 import { ActivatedRoute } from '@angular/router';
 import { PostModel } from 'src/app/shared/post-model';
 import { throwError } from 'rxjs';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CommentPayload } from 'src/app/comment/comment.payload';
+import { CommentService } from 'src/app/comment/comment.service';
 
 @Component({
   selector: 'app-view-post',
@@ -13,9 +16,43 @@ export class ViewPostComponent implements OnInit {
 
   postId: number;
   post: PostModel;
+  commentForm: FormGroup;
+  commentPayload: CommentPayload;
+  comments: CommentPayload[];
 
-  constructor(private postService: PostService, private activateRoute: ActivatedRoute) {
+  constructor(private postService: PostService,
+    private activateRoute: ActivatedRoute,
+    private commentService: CommentService) {
+    // Get the postId passed to this route
     this.postId = this.activateRoute.snapshot.params.id;
+
+    // Populate the post by given postId
+    this.postService.getPost(this.postId).subscribe(data => {
+      this.post = data;
+    }, error => {
+      throwError(error);
+    });
+
+    // Init the commentForm
+    this.commentForm = new FormGroup({
+      text: new FormControl('', Validators.required)
+    });
+
+    // Init the commentsPayload
+    this.commentPayload = {
+      text: '',
+      postId: this.postId
+    };
+  }
+
+  ngOnInit(): void {
+    // Whenever we reload the page we need to load the 
+    // post information and comment information from the backend
+    this.getPostById();
+    this.getCommentsForPost();
+  }
+
+  private getPostById() {
     this.postService.getPost(this.postId).subscribe(data => {
       this.post = data;
     }, error => {
@@ -23,7 +60,25 @@ export class ViewPostComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  private getCommentsForPost() {
+    this.commentService.getAllCommentsForPost(this.postId).subscribe(data => {
+      this.comments = data;
+    }, error => {
+      throwError(error);
+    });
+  }
+
+  postComment() {
+    // Fill the commentPayload with the current form value
+    this.commentPayload.text = this.commentForm.get('text').value;
+
+    // Call the postComment API using service
+    this.commentService.postComment(this.commentPayload).subscribe(data => {
+      this.commentForm.get('text').setValue(''); // Resetting value to allow a new comment
+      this.getCommentsForPost();
+    }, error => {
+      throwError(error);
+    });
   }
 
 }
