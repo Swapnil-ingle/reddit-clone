@@ -27,9 +27,18 @@ The goal of the project is not JUST to finish the project following the tutorial
 #### Frontend
 * This is still in progress...
 * Implemented the sign-up, sign-in functionality.
+* Completed creating Sub-Reddits.
+* Adding post under Sub-Reddits.
+* Adding markdown comments under post.
+* User profile overview page.
 
+#### Interesting To-Do(s):
+* Add option for user-profile picture.
+* Add proper view/message for user who has signed-up but not yet verified email.
 
 #### Latest Changes:
-* Added: The homepage of the reddit screen with different compenent such as subreddit side-bar, vote-section, etc.
 * Fixed: Added proper padding between title bar and post section.
 * Added: Create-Subreddit page, create-post page, list-posts page.
+* Added: Comment section and add-comment functionality
+* Added: 1. Changed the nav-bar to not display Sign-Up/Login button when user is logged in. 2. Added user-
+profile dropdown button instead. 3. Added user-profile button and page
