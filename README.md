@@ -25,20 +25,29 @@ The goal of the project is not JUST to finish the project following the tutorial
 * The backend API documentation is done using Swagger.
 
 #### Frontend
-* This is still in progress...
-* Implemented the sign-up, sign-in functionality.
-* Completed creating Sub-Reddits.
-* Adding post under Sub-Reddits.
-* Adding markdown comments under post.
-* User profile overview page.
+* User can sign-up, sign-in, log-out.
+* Non-Registered users can view sub-reddits, post and comments but cannot post anything.
+* Registered users can: 
+> 1. Create sub-reddits.
+> 2. Add posts under sub-reddits.
+> 3. Add comments under posts.
+> 4. Upvote/Downvote posts.
 
 #### Interesting To-Do(s):
 * Add option for user-profile picture.
 * Add proper view/message for user who has signed-up but not yet verified email.
 
 #### Latest Changes:
-* Fixed: Added proper padding between title bar and post section.
-* Added: Create-Subreddit page, create-post page, list-posts page.
-* Added: Comment section and add-comment functionality
 * Added: 1. Changed the nav-bar to not display Sign-Up/Login button when user is logged in. 2. Added user-
 profile dropdown button instead. 3. Added user-profile button and page
+* Added 'Subreddit-Overview' page.
+* SI: 1. Bug fixes for voting module. 2. Header persistent issue fix
+* Added: AuthGuard to prevent unauthorized access to certain modules
+* Added logout functionality
+
+#### Screenshot(s)
+##### Reddit Homepage
+![alt text](https://github.com/Swapnil-ingle/reddit-clone/blob/master/readme/imgs/reddit-home.png "Reddit HomePage")
+
+##### Sub-Reddits Overview Page
+![alt text](https://github.com/Swapnil-ingle/reddit-clone/blob/master/readme/imgs/reddit-subreddit-overview.png "Reddit HomePage")
