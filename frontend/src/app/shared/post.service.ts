@@ -18,6 +18,10 @@ export class PostService {
     return this.httpClient.get<PostModel>('http://localhost:8080/api/posts/' + id);
   }
 
+  getAllPostsByUser(name: string): Observable<PostModel[]> {
+    return this.httpClient.get<PostModel[]>('http://localhost:8080/api/posts/by-user/' + name);
+  }
+
   createPost(postPayload: CreatePostPayload): Observable<any> {
     return this.httpClient.post('http://localhost:8080/api/posts/', postPayload);
   }
