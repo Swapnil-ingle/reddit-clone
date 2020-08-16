@@ -1,6 +1,6 @@
 import { VoteType } from './vote-type';
 
 export class VotePayload {
-    voteType: VoteType;
+    type: VoteType;
     postId: number;
 }

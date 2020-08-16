@@ -28,7 +28,7 @@ export class VoteButtonComponent implements OnInit {
     private toastr: ToastrService) {
     // Initialized votePayload with undefined values
     this.votePayload = {
-      voteType: undefined,
+      type: undefined,
       postId: undefined
     };
   }
@@ -37,12 +37,12 @@ export class VoteButtonComponent implements OnInit {
   }
 
   upvotePost() {
-    this.votePayload.voteType = VoteType.UPVOTE;
+    this.votePayload.type = VoteType.UPVOTE;
     this.vote();
   }
 
   downvotePost() {
-    this.votePayload.voteType = VoteType.DOWNVOTE;
+    this.votePayload.type = VoteType.DOWNVOTE;
     this.vote();
   }
 
@@ -52,7 +52,7 @@ export class VoteButtonComponent implements OnInit {
     this.voteService.vote(this.votePayload).subscribe(() => {
       this.updateVoteDetails();
     }, error => {
-      this.toastr.error(error.error.message);
+      this.toastr.error(error.error);
       throwError(error);
     });
   }

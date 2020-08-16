@@ -33,7 +33,9 @@ public class VoteService {
 		Optional<Vote> voteByPostAndUser = voteRepo.findTopByPostAndUserOrderByIdDesc(post,
 				authSvc.getCurrentUser());
 
-		if (voteByPostAndUser.isPresent() && voteByPostAndUser.get().getVoteType().equals(voteDto.getType())) {
+		if (voteByPostAndUser.isPresent() && 
+				voteByPostAndUser.get().getVoteType() != null &&
+				voteByPostAndUser.get().getVoteType().equals(voteDto.getType())) {
 			throw new SpringRedditException(String.format("You have already %sD this post", voteDto.getType()));
 		}
 
