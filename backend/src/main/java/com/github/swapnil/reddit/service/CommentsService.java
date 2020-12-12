@@ -1,5 +1,6 @@
 package com.github.swapnil.reddit.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,7 @@ import com.github.swapnil.reddit.repository.PostRepository;
 import com.github.swapnil.reddit.repository.UserRepository;
 
 import lombok.AllArgsConstructor;
+import org.springframework.util.StringUtils;
 
 @Service
 @AllArgsConstructor
@@ -65,4 +67,20 @@ public class CommentsService {
 				() -> new UsernameNotFoundException(String.format("User with username '%s' not found", username)));
 		return commentRepo.findByUser(user).stream().map(commentMapper::mapToDto).collect(Collectors.toList());
 	}
+
+	public boolean containsSwearWords(String comment) {
+		if (StringUtils.isEmpty(comment)) {
+			return false;
+		}
+
+		for (String swearWord : SWEAR_WORDS) {
+			if (comment.toLowerCase().contains(swearWord.toLowerCase())) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private final static List<String> SWEAR_WORDS = Arrays.asList("Shit", "Fuck");
 }
